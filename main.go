@@ -14,7 +14,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!\n")
+		return c.String(http.StatusOK, "Hello, Deploy!\n")
 	})
 
 	e.Logger.Fatal(e.Start(":1323"))
