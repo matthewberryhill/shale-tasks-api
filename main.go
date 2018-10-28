@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 
 	"github.com/matthewberryhill/shale-tasks-api/config"
+	"github.com/matthewberryhill/shale-tasks-api/models"
 	"github.com/matthewberryhill/shale-tasks-api/server"
 
 	"github.com/labstack/echo"
@@ -35,7 +35,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(conf)
+	models.ConfigureDB(conf.Mongo)
 
 	e := echo.New()
 
@@ -43,6 +43,8 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/config", server.GetConfig)
+
+	e.POST("/tasks", server.CreateTask)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
