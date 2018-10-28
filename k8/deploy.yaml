@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta2 # before 1.9
+kind: Deployment
+metadata:
+  name: shale-tasks-api
+spec:
+  selector:
+    matchLabels:
+      app: shale-tasks-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shale-tasks-api
+    spec:
+      containers:
+      - name: shale-tasks-api
+        image: matthewberryhill/shale-tasks-api:pre
