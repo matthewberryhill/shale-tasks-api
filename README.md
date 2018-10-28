@@ -1,5 +1,15 @@
 # Shale Tasks API
 
+## Development
+
+### Clone/Run Project
+
+```bash 
+$ go get github.com/matthewberryhill/shale-tasks-api
+$ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
+$ go run main.go
+```
+
 ## API spec
 
 ### POST/tasks
