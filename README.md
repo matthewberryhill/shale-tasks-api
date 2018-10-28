@@ -24,6 +24,14 @@ $ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
 $ go run main.go
 ```
 
+### Build/Run on Docker
+ 
+```bash
+# must have docker installed
+$ docker build -t shale-tasks-api .
+$ docker run -itp 1323:1323 shale-tasks-api
+```
+
 ## API Spec
 
 ### POST/tasks
