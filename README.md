@@ -2,15 +2,29 @@
 
 ## Development
 
-### Clone/Run Project
+### Clone Project
 
-```bash 
+```bash
 $ go get github.com/matthewberryhill/shale-tasks-api
+$ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
+```
+
+### Get Dependencies
+
+```bash
+$ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
+# must have the dep dependency manager
+$ dep ensure
+```
+
+### Run Locally
+ 
+```bash
 $ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
 $ go run main.go
 ```
 
-## API spec
+## API Spec
 
 ### POST/tasks
 
