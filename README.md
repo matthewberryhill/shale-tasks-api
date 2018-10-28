@@ -32,6 +32,10 @@ $ docker build -t shale-tasks-api .
 $ docker run -itp 1323:1323 shale-tasks-api
 ```
 
+### CI/CD Pipeline
+
+[Pipeline](https://travis-ci.org/matthewberryhill/shale-tasks-api)
+
 ## API Spec
 
 ### POST/tasks

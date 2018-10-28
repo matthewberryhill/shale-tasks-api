@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - "1.10"
+
+before_install:
+  - go get
+
+install:
+  - sudo docker build -t test/build .
