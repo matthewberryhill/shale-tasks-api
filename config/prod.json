@@ -1,0 +1,7 @@
+{
+  "mongo": [
+    "mongo-rs-mongodb-replicaset-0:27017",
+    "mongo-rs-mongodb-replicaset-1:27017",
+    "mongo-rs-mongodb-replicaset-2:27017"
+  ]
+}
