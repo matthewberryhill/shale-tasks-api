@@ -1,5 +1,7 @@
 # Shale Tasks API
 
+[Project Management](https://github.com/orgs/matthewberryhill/projects/1)
+
 ## Development
 
 ### Clone Project
@@ -37,6 +39,32 @@ $ docker run -itp 1323:1323 shale-tasks-api
 [Pipeline](https://travis-ci.org/matthewberryhill/shale-tasks-api)
 
 ## API Spec
+
+### GET/config
+
+**Headers**
+
+```text
+Accept: application/json
+```
+
+**Response Payload**
+
+```
+{
+  "name": {string},
+  "version": {string},
+  "environment": {string},
+  "error": {string},
+}
+```
+
+**Response Codes**
+
+```text
+200: Ok
+500: Internal Server Error
+```
 
 ### POST/tasks
 
