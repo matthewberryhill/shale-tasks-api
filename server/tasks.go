@@ -24,6 +24,12 @@ func CreateTask(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
+	if tp.Task == "" {
+		er := new(responseError)
+		er.Error = "Request payload requires the 'task' field"
+		return c.JSON(http.StatusBadRequest, er)
+	}
+
 	ts, err := models.GetTasks()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
