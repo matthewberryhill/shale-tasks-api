@@ -45,6 +45,7 @@ func main() {
 	e.GET("/config", server.GetConfig)
 
 	e.POST("/tasks", server.CreateTask)
+	e.GET("/tasks", server.GetTasks)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

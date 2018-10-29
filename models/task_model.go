@@ -55,3 +55,24 @@ func (u *Task) CreateTask() error {
 
 	return nil
 }
+
+func GetTasks() ([]*Task, error) {
+	session, err := mgo.DialWithInfo(mongoAddr)
+	if err != nil {
+		log.Println("Could not connect to mongo: ", err.Error())
+		return nil, err
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB("shale").C("tasks")
+	var Tasks []*Task
+	err = c.Find(bson.M{}).All(&Tasks)
+	if err != nil {
+		log.Println("Error retrieving Tasks: ", err.Error())
+		return nil, err
+	}
+
+	return Tasks, nil
+}

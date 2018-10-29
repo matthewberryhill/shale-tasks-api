@@ -25,3 +25,12 @@ func CreateTask(c echo.Context) error {
 
 	return c.JSON(http.StatusCreated, t)
 }
+
+func GetTasks(c echo.Context) error {
+	tasks, err := models.GetTasks()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, tasks)
+}
