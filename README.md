@@ -3,10 +3,10 @@
 ## Details
 
 This project is deployed on GKE with a MongoDB data layer as a 3 node stateful set. There is a TLS reverse proxy
-in place, however, the let's encrypt token isn't quite working correctly that may or may not be an error in the
+in place, however, the let's encrypt token isn't quite working correctly. That may or may not be an error in the
 proxy's deployment. A postman library has been added to hit the endpoints, but one must turn off the `SSL certificate verification`
 setting to make it work in its current state. All repos regarding the project can be found [here](https://github.com/matthewberryhill).
-Both the proxy service and the tasks-api service are scaled to 3 nodes on the cluster.
+The tasks service is scaled to 3 nodes on the cluster.
 
 [Project Management](https://github.com/orgs/matthewberryhill/projects/1)
 
