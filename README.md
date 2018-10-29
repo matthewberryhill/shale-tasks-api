@@ -1,5 +1,13 @@
 # Shale Tasks API
 
+## Details
+
+This project is deployed on GKE with a MongoDB data layer as a 3 node stateful set. There is a TLS reverse proxy
+in place, however, the let's encrypt token isn't quite working correctly that may or may not be an error in the
+proxy's deployment. A postman library has been added to hit the endpoints, but one must turn off the `SSL certificate verification`
+setting to make it work in its current state. All repos regarding the project can be found [here](https://github.com/matthewberryhill).
+Both the proxy service and the tasks-api service are scaled to 3 nodes on the cluster.
+
 [Project Management](https://github.com/orgs/matthewberryhill/projects/1)
 
 ## Development
@@ -22,6 +30,7 @@ $ dep ensure
 ### Run Locally
  
 ```bash
+$ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
 # point to local mongo instance
 $ export MONGO=dev
 # up local mongoDB instance
@@ -29,7 +38,6 @@ $ docker-compose -f mongo-compose.yaml up -d
 # see mongo running
 $ docker ps
 # run app
-$ cd $GOPATH/src/github.com/matthewberryhill/shale-tasks-api
 $ go run main.go
 ```
 
