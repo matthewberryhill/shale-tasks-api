@@ -39,6 +39,10 @@ $ go run main.go
 
 ## API Spec
 
+**Use the following URL to hit the endpoints**
+
+`https://matthewberryhill.com`
+
 ### GET/config
 
 **Headers**
@@ -93,6 +97,7 @@ Content-Type: application/json
   "id": {string},
   "task": {string},
   "date_created": {unix_timestamp},
+  "date_completed": {unix_timestamp},
   "completed": {bool}
 }
 ```
@@ -122,6 +127,7 @@ Accept: application/json
     "id": {string},
     "task": {string},
     "date_created": {unix_timestamp},
+    "date_completed": {unix_timestamp},
     "completed": {bool}
   }
 ]
@@ -155,6 +161,7 @@ id: {string}
   "id": {string},
   "task": {string},
   "date_created": {unix_timestamp},
+  "date_completed": {unix_timestamp},
   "completed": {bool}
 }
 ```
@@ -197,11 +204,14 @@ id: {string}
 
 *Task cannot share the same string as the task field*
 
+*Once a task in complete, that task cannot be incomplete*
+
 ```
 {
   "id": {string},
   "task": {string},
   "date_created": {unix_timestamp},
+  "date_completed": {unix_timestamp},
   "completed": {bool}
 }
 ```

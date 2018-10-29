@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/matthewberryhill/shale-tasks-api/models"
 
@@ -38,7 +39,7 @@ func CreateTask(c echo.Context) error {
 	for _, t := range ts {
 		if tp.Task == t.Task {
 			re := new(responseError)
-			re.Error = "Task cannot share the same string as the 'task' field"
+			re.Error = "Task cannot share the same string as the 'task' field of another task"
 			return c.JSON(http.StatusConflict, re)
 		}
 	}
@@ -93,14 +94,6 @@ func UpdateTask(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	for _, t := range ts {
-		if tp.Task == t.Task {
-			re := new(responseError)
-			re.Error = "Task cannot share the same string as the 'task' field"
-			return c.JSON(http.StatusConflict, re)
-		}
-	}
-
 	id := bson.ObjectIdHex(c.Param("id"))
 	t, err := models.GetTaskById(id.Hex())
 	if err != nil {
@@ -109,11 +102,24 @@ func UpdateTask(c echo.Context) error {
 		}
 		return c.JSON(http.StatusInternalServerError, err)
 	}
+
+	for _, tt := range ts {
+		if tp.Task == tt.Task && t.Task != tp.Task {
+			re := new(responseError)
+			re.Error = "Task cannot share the same string as the 'task' field of another task"
+			return c.JSON(http.StatusConflict, re)
+		}
+	}
+
 	for k, v := range tpi {
 		if k == "task" {
 			t.Task = v.(string)
 		} else if k == "completed" {
-			t.Completed = v.(bool)
+			if v.(bool) {
+				now := time.Now()
+				t.DateCompleted = &now
+				t.Completed = true
+			}
 		}
 	}
 

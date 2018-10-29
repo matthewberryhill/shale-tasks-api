@@ -21,6 +21,7 @@ type Task struct {
 	Id          *bson.ObjectId `json:"id" bson:"_id"`
 	Task        string         `json:"task"`
 	DateCreated *time.Time     `json:"date_created"`
+	DateCompleted *time.Time   `json:"date_completed"`
 	Completed   bool           `json:"completed"`
 }
 
