@@ -29,8 +29,22 @@ func CreateTask(c echo.Context) error {
 func GetTasks(c echo.Context) error {
 	tasks, err := models.GetTasks()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, err)
+		return c.JSON(http.StatusInternalServerError, err)
 	}
 
 	return c.JSON(http.StatusOK, tasks)
+}
+
+func DeleteTask(c echo.Context) error {
+	id := c.Param("id")
+
+	err := models.DeleteTask(id)
+	if err != nil {
+		if err.Error() == "not found" {
+			return c.JSON(http.StatusNotFound, err)
+		}
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.NoContent(http.StatusNoContent)
 }

@@ -98,7 +98,7 @@ Content-Type: application/json
 **Response Codes**
 
 ```text
-204: Created
+201: Created
 400: Bad Request
 409: Conflict
 500: Internal Server Error
@@ -234,7 +234,7 @@ id: {string}
 **Response Codes**
 
 ```text
-200: Ok
+204: No Content
 400: Bad Request
 404: Not Found
 500: Internal Server Error

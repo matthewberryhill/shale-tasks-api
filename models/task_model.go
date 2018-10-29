@@ -76,3 +76,23 @@ func GetTasks() ([]*Task, error) {
 
 	return Tasks, nil
 }
+
+func DeleteTask(id string) error {
+	session, err := mgo.DialWithInfo(mongoAddr)
+	if err != nil {
+		log.Println("Could not connect to mongo: ", err.Error())
+		return nil
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB("shale").C("tasks")
+	err = c.RemoveId(bson.ObjectIdHex(id))
+	if err != nil {
+		log.Println("Error deleteing Property: ", err.Error())
+		return err
+	}
+
+	return nil
+}
