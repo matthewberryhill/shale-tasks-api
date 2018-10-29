@@ -10,7 +10,7 @@ type Config struct {
 func GetConfig() *Config {
 	c := new(Config)
 	c.Name = "shale-tasks-api"
-	c.Version = "0.0.1"
+	c.Version = "0.0.2"
 	c.Environment = "prod"
 	c.Error = ""
 
