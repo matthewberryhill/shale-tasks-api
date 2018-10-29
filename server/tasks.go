@@ -10,6 +10,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+type responseError struct {
+	Error string `json:"error"`
+}
+
 func CreateTask(c echo.Context) error {
 	type taskPayload struct {
 		Task string `json:"task"`
@@ -18,6 +22,19 @@ func CreateTask(c echo.Context) error {
 	tp := new(taskPayload)
 	if err := c.Bind(tp); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	ts, err := models.GetTasks()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	for _, t := range ts {
+		if tp.Task == t.Task {
+			re := new(responseError)
+			re.Error = "Task cannot share the same string as the 'task' field"
+			return c.JSON(http.StatusConflict, re)
+		}
 	}
 
 	t := models.NewTask(tp.Task)
@@ -64,6 +81,19 @@ func UpdateTask(c echo.Context) error {
 	var tpi map[string]interface{}
 	tpiJson, _ := json.Marshal(tp)
 	json.Unmarshal(tpiJson, &tpi)
+
+	ts, err := models.GetTasks()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	for _, t := range ts {
+		if tp.Task == t.Task {
+			re := new(responseError)
+			re.Error = "Task cannot share the same string as the 'task' field"
+			return c.JSON(http.StatusConflict, re)
+		}
+	}
 
 	id := bson.ObjectIdHex(c.Param("id"))
 	t, err := models.GetTaskById(id.Hex())
