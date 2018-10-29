@@ -76,6 +76,8 @@ Content-Type: application/json
 
 **Request Payload**
 
+*Task cannot share the same string as the task field*
+
 ```
 {
   "task": {string},
@@ -100,6 +102,7 @@ Content-Type: application/json
 ```text
 201: Created
 400: Bad Request
+409: Conflict
 500: Internal Server Error
 ```
 
@@ -192,6 +195,8 @@ id: {string}
 
 **Response Payload**
 
+*Task cannot share the same string as the task field*
+
 ```
 {
   "id": {string},
@@ -207,6 +212,7 @@ id: {string}
 200: Ok
 400: Bad Request
 404: Not Found
+409: Conflict
 500: Internal Server Error
 ```
 
