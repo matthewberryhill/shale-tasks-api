@@ -78,7 +78,7 @@ Content-Type: application/json
 
 ```
 {
-  "title": {string},
+  "task": {string},
   "date_created": {unix_timestamp},
   "completed": {bool}
 }
@@ -89,7 +89,7 @@ Content-Type: application/json
 ```
 {
   "id": {string},
-  "title": {string},
+  "task": {string},
   "date_created": {unix_timestamp},
   "completed": {bool}
 }
@@ -98,9 +98,8 @@ Content-Type: application/json
 **Response Codes**
 
 ```text
-204: Created
+201: Created
 400: Bad Request
-409: Conflict
 500: Internal Server Error
 ```
 
@@ -118,7 +117,7 @@ Accept: application/json
 [
   {
     "id": {string},
-    "title": {string},
+    "task": {string},
     "date_created": {unix_timestamp},
     "completed": {bool}
   }
@@ -151,7 +150,7 @@ id: {string}
 ```
 {
   "id": {string},
-  "title": {string},
+  "task": {string},
   "date_created": {unix_timestamp},
   "completed": {bool}
 }
@@ -161,7 +160,6 @@ id: {string}
 
 ```text
 200: Ok
-400: Bad Request
 404: Not Found
 500: Internal Server Error
 ```
@@ -183,10 +181,11 @@ id: {string}
 
 **Request Payload**
 
+*both parameters are optional*
+
 ```
 {
-  "title": {string},
-  "date_created": {unix_timestamp},
+  "task": {string},
   "completed": {bool}
 }
 ```
@@ -196,7 +195,7 @@ id: {string}
 ```
 {
   "id": {string},
-  "title": {string},
+  "task": {string},
   "date_created": {unix_timestamp},
   "completed": {bool}
 }
@@ -234,8 +233,7 @@ id: {string}
 **Response Codes**
 
 ```text
-200: Ok
-400: Bad Request
+204: No Content
 404: Not Found
 500: Internal Server Error
 ```

@@ -1,10 +1,10 @@
 package models
 
 type Config struct {
-	Name string `json:"name"`
-	Version string `json:"version"`
+	Name        string `json:"name"`
+	Version     string `json:"version"`
 	Environment string `json:"environment"`
-	Error string `json:"error"`
+	Error       string `json:"error"`
 }
 
 func GetConfig() *Config {
