@@ -26,7 +26,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"task\": \"test\"\n}"
+					"raw": "{\n\t\"task\": \"Call mom\"\n}"
 				},
 				"description": ""
 			},
@@ -118,16 +118,11 @@
 			"response": []
 		},
 		{
-			"name": "POST/config",
+			"name": "GET/tasks/config",
 			"request": {
-				"url": "{{uri}}/config",
+				"url": "{{uri}}/tasks/config",
 				"method": "GET",
 				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
 					{
 						"key": "Accept",
 						"value": "application/json",

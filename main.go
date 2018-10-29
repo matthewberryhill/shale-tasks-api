@@ -42,7 +42,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/config", server.GetConfig)
+	e.GET("/tasks/config", server.GetConfig)
 
 	e.POST("/tasks", server.CreateTask)
 	e.GET("/tasks", server.GetTasks)
