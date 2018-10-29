@@ -7,6 +7,8 @@ cache:
   directories:
     -s "$HOME/coding/google-cloud-sdk"
 
+services: mongodb
+
 env:
   global:
     - GOOGLE_APPLICATION_CREDENTIALS-~/.gcloud-service-key.json
@@ -22,7 +24,6 @@ before_install:
   - gcloud --quiet components update beta
   - go get
   - go get github.com/smartystreets/goconvey/convey
-  - sudo docker-compose -f mongo-compose.yaml up --build -d
 
 install:
   - sudo docker build -t test/build .
