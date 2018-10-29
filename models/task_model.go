@@ -67,14 +67,35 @@ func GetTasks() ([]*Task, error) {
 	session.SetMode(mgo.Monotonic, true)
 
 	c := session.DB("shale").C("tasks")
-	var Tasks []*Task
-	err = c.Find(bson.M{}).All(&Tasks)
+	var tasks []*Task
+	err = c.Find(bson.M{}).All(&tasks)
 	if err != nil {
 		log.Println("Error retrieving Tasks: ", err.Error())
 		return nil, err
 	}
 
-	return Tasks, nil
+	return tasks, nil
+}
+
+func GetTaskById(id string) (*Task, error) {
+	session, err := mgo.DialWithInfo(mongoAddr)
+	if err != nil {
+		log.Println("Could not connect to mongo: ", err.Error())
+		return nil, err
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB("shale").C("tasks")
+	var task *Task
+	err = c.FindId(bson.ObjectIdHex(id)).One(&task)
+	if err != nil {
+		log.Println("Error retrieving task by id: ", err.Error())
+		return nil, err
+	}
+
+	return task, nil
 }
 
 func DeleteTask(id string) error {
