@@ -47,6 +47,7 @@ func main() {
 	e.POST("/tasks", server.CreateTask)
 	e.GET("/tasks", server.GetTasks)
 	e.GET("/tasks/:id", server.GetTaskById)
+	e.PUT("/tasks/:id", server.UpdateTask)
 	e.DELETE("/tasks/:id", server.DeleteTask)
 
 	e.Logger.Fatal(e.Start(":1323"))

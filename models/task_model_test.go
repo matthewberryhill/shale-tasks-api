@@ -7,6 +7,7 @@ import (
 
 	"github.com/matthewberryhill/shale-tasks-api/config"
 
+	"fmt"
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/tkanos/gonfig"
 	"gopkg.in/mgo.v2/bson"
@@ -91,12 +92,43 @@ func TestTasks_GetTaskById(t *testing.T) {
 
 		ConfigureDB(conf.Mongo)
 
-		Convey("When calling GetTasks(...)", func() {
+		Convey("When calling GetTaskById(testId)", func() {
 			before := runtime.NumGoroutine()
 			task, _ := GetTaskById(testId.Hex())
 
-			Convey("Then the retieved tasks [] should be greater than 0", func() {
+			Convey("Then the retieved task should have the same id has the testId", func() {
 				So(task.Id.Hex(), ShouldEqual, testId.Hex())
+			})
+
+			Convey("Then number of goroutines after call should be the same", func() {
+				after := runtime.NumGoroutine()
+				So(before, ShouldBeLessThanOrEqualTo, after)
+			})
+		})
+	})
+}
+
+func TestTasks_UpdateTask(t *testing.T) {
+	Convey("If a test database exists", t, func() {
+		configPath := "../config/dev.json"
+		conf := config.Config{}
+		err := gonfig.GetConf(configPath, &conf)
+		if err != nil {
+			panic(err)
+		}
+
+		ConfigureDB(conf.Mongo)
+
+		Convey("When calling model.UpdateTask to be completed", func() {
+			before := runtime.NumGoroutine()
+			t, _ := GetTaskById(testId.Hex())
+			t.Completed = true
+			fmt.Println(t.Completed)
+			t.UpdateTask()
+
+			Convey("Then the task should be completed", func() {
+				updatedTask, _ := GetTaskById(testId.Hex())
+				So(updatedTask.Completed, ShouldEqual, true)
 			})
 
 			Convey("Then number of goroutines after call should be the same", func() {

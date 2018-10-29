@@ -98,6 +98,25 @@ func GetTaskById(id string) (*Task, error) {
 	return task, nil
 }
 
+func (t *Task) UpdateTask() error {
+	session, err := mgo.DialWithInfo(mongoAddr)
+	if err != nil {
+		log.Println("Could not connect to mongo: ", err.Error())
+		return err
+	}
+	defer session.Close()
+
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("shale").C("tasks")
+	err = c.UpdateId(t.Id, t)
+	if err != nil {
+		log.Println("Error updating channel: ", err.Error())
+		return err
+	}
+
+	return nil
+}
+
 func DeleteTask(id string) error {
 	session, err := mgo.DialWithInfo(mongoAddr)
 	if err != nil {
